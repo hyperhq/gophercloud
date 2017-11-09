@@ -18,7 +18,7 @@ func TestAttach(t *testing.T) {
 		Mode:         "rw",
 		InstanceUUID: "50902f4f-a974-46a0-85e9-7efc5e22dfdd",
 	}
-	err := Attach(client.ServiceClient(), "cd281d77-8217-4830-be95-9528227c105c", options).ExtractErr()
+	_, err := Attach(client.ServiceClient(), "cd281d77-8217-4830-be95-9528227c105c", options).Extract()
 	th.AssertNoErr(t, err)
 }
 
@@ -28,7 +28,7 @@ func TestDetach(t *testing.T) {
 
 	MockDetachResponse(t)
 
-	err := Detach(client.ServiceClient(), "cd281d77-8217-4830-be95-9528227c105c").ExtractErr()
+	_, err := Detach(client.ServiceClient(), "cd281d77-8217-4830-be95-9528227c105c").Extract()
 	th.AssertNoErr(t, err)
 }
 
@@ -38,7 +38,7 @@ func TestReserve(t *testing.T) {
 
 	MockReserveResponse(t)
 
-	err := Reserve(client.ServiceClient(), "cd281d77-8217-4830-be95-9528227c105c").ExtractErr()
+	_, err := Reserve(client.ServiceClient(), "cd281d77-8217-4830-be95-9528227c105c").Extract()
 	th.AssertNoErr(t, err)
 }
 
@@ -48,7 +48,7 @@ func TestUnreserve(t *testing.T) {
 
 	MockUnreserveResponse(t)
 
-	err := Unreserve(client.ServiceClient(), "cd281d77-8217-4830-be95-9528227c105c").ExtractErr()
+	_, err := Unreserve(client.ServiceClient(), "cd281d77-8217-4830-be95-9528227c105c").Extract()
 	th.AssertNoErr(t, err)
 }
 
@@ -84,6 +84,6 @@ func TestTerminateConnection(t *testing.T) {
 		Platform:  "x86_64",
 		OSType:    "linux2",
 	}
-	err := TerminateConnection(client.ServiceClient(), "cd281d77-8217-4830-be95-9528227c105c", options).ExtractErr()
+	_, err := TerminateConnection(client.ServiceClient(), "cd281d77-8217-4830-be95-9528227c105c", options).Extract()
 	th.AssertNoErr(t, err)
 }

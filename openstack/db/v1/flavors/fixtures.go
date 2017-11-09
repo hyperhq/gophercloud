@@ -1,5 +1,3 @@
-// +build fixtures
-
 package flavors
 
 import (

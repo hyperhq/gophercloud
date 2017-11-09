@@ -119,8 +119,7 @@ func TestCreate(t *testing.T) {
         "protocol": "HTTP",
         "name": "Example pool",
         "subnet_id": "1981f108-3c48-48d2-b908-30f7d28532c9",
-        "tenant_id": "2ffc6e22aae24e4795f87155d24c896f",
-        "provider": "haproxy"
+        "tenant_id": "2ffc6e22aae24e4795f87155d24c896f"
     }
 }
 			`)
@@ -144,8 +143,7 @@ func TestCreate(t *testing.T) {
         "admin_state_up": true,
         "subnet_id": "1981f108-3c48-48d2-b908-30f7d28532c9",
         "tenant_id": "2ffc6e22aae24e4795f87155d24c896f",
-        "health_monitors_status": [],
-        "provider": "haproxy"
+        "health_monitors_status": []
     }
 }
 		`)
@@ -157,7 +155,6 @@ func TestCreate(t *testing.T) {
 		Name:     "Example pool",
 		SubnetID: "1981f108-3c48-48d2-b908-30f7d28532c9",
 		TenantID: "2ffc6e22aae24e4795f87155d24c896f",
-		Provider: "haproxy",
 	}
 	p, err := Create(fake.ServiceClient(), options).Extract()
 	th.AssertNoErr(t, err)
@@ -172,7 +169,6 @@ func TestCreate(t *testing.T) {
 	th.AssertEquals(t, "Example pool", p.Name)
 	th.AssertEquals(t, "1981f108-3c48-48d2-b908-30f7d28532c9", p.SubnetID)
 	th.AssertEquals(t, "2ffc6e22aae24e4795f87155d24c896f", p.TenantID)
-	th.AssertEquals(t, "haproxy", p.Provider)
 }
 
 func TestGet(t *testing.T) {

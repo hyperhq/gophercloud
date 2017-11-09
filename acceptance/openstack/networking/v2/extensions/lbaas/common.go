@@ -44,7 +44,6 @@ func CreatePool(t *testing.T, subnetID string) string {
 		Protocol: "HTTP",
 		Name:     "tmp_pool",
 		SubnetID: subnetID,
-		Provider: "haproxy",
 	}).Extract()
 
 	th.AssertNoErr(t, err)

@@ -108,7 +108,6 @@ type CreateOpts struct {
 	TenantID        string
 	AllocationPools []AllocationPool
 	GatewayIP       string
-	NoGateway       bool
 	IPVersion       int
 	EnableDHCP      *bool
 	DNSNameservers  []string
@@ -129,11 +128,6 @@ func (opts CreateOpts) ToSubnetCreateMap() (map[string]interface{}, error) {
 		return nil, errInvalidIPType
 	}
 
-	// Both GatewayIP and NoGateway should not be set
-	if opts.GatewayIP != "" && opts.NoGateway {
-		return nil, errInvalidGatewayConfig
-	}
-
 	s["network_id"] = opts.NetworkID
 	s["cidr"] = opts.CIDR
 
@@ -145,8 +139,6 @@ func (opts CreateOpts) ToSubnetCreateMap() (map[string]interface{}, error) {
 	}
 	if opts.GatewayIP != "" {
 		s["gateway_ip"] = opts.GatewayIP
-	} else if opts.NoGateway {
-		s["gateway_ip"] = nil
 	}
 	if opts.TenantID != "" {
 		s["tenant_id"] = opts.TenantID
@@ -192,7 +184,6 @@ type UpdateOptsBuilder interface {
 type UpdateOpts struct {
 	Name           string
 	GatewayIP      string
-	NoGateway      bool
 	DNSNameservers []string
 	HostRoutes     []HostRoute
 	EnableDHCP     *bool
@@ -202,11 +193,6 @@ type UpdateOpts struct {
 func (opts UpdateOpts) ToSubnetUpdateMap() (map[string]interface{}, error) {
 	s := make(map[string]interface{})
 
-	// Both GatewayIP and NoGateway should not be set
-	if opts.GatewayIP != "" && opts.NoGateway {
-		return nil, errInvalidGatewayConfig
-	}
-
 	if opts.EnableDHCP != nil {
 		s["enable_dhcp"] = &opts.EnableDHCP
 	}
@@ -215,8 +201,6 @@ func (opts UpdateOpts) ToSubnetUpdateMap() (map[string]interface{}, error) {
 	}
 	if opts.GatewayIP != "" {
 		s["gateway_ip"] = opts.GatewayIP
-	} else if opts.NoGateway {
-		s["gateway_ip"] = nil
 	}
 	if opts.DNSNameservers != nil {
 		s["dns_nameservers"] = opts.DNSNameservers

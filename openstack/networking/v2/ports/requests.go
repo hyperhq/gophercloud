@@ -102,8 +102,10 @@ type CreateOpts struct {
 	FixedIPs            interface{}
 	DeviceID            string
 	DeviceOwner         string
+	DNSName             string
 	TenantID            string
 	SecurityGroups      []string
+	HostID              string
 	AllowedAddressPairs []AddressPair
 }
 
@@ -121,6 +123,9 @@ func (opts CreateOpts) ToPortCreateMap() (map[string]interface{}, error) {
 	}
 	if opts.DeviceOwner != "" {
 		p["device_owner"] = opts.DeviceOwner
+	}
+	if opts.DNSName != "" {
+		p["dns_name"] = opts.DNSName
 	}
 	if opts.FixedIPs != nil {
 		p["fixed_ips"] = opts.FixedIPs
@@ -142,6 +147,9 @@ func (opts CreateOpts) ToPortCreateMap() (map[string]interface{}, error) {
 	}
 	if opts.AllowedAddressPairs != nil {
 		p["allowed_address_pairs"] = opts.AllowedAddressPairs
+	}
+	if opts.HostID != "" {
+		p["binding:host_id"] = opts.HostID
 	}
 
 	return map[string]interface{}{"port": p}, nil
@@ -178,6 +186,8 @@ type UpdateOpts struct {
 	DeviceID            string
 	DeviceOwner         string
 	SecurityGroups      []string
+	DNSName             string
+	HostID              string
 	AllowedAddressPairs []AddressPair
 }
 
@@ -190,6 +200,9 @@ func (opts UpdateOpts) ToPortUpdateMap() (map[string]interface{}, error) {
 	}
 	if opts.DeviceOwner != "" {
 		p["device_owner"] = opts.DeviceOwner
+	}
+	if opts.DNSName != "" {
+		p["dns_name"] = opts.DNSName
 	}
 	if opts.FixedIPs != nil {
 		p["fixed_ips"] = opts.FixedIPs
@@ -205,6 +218,9 @@ func (opts UpdateOpts) ToPortUpdateMap() (map[string]interface{}, error) {
 	}
 	if opts.AllowedAddressPairs != nil {
 		p["allowed_address_pairs"] = opts.AllowedAddressPairs
+	}
+	if opts.HostID != "" {
+		p["binding:host_id"] = opts.HostID
 	}
 
 	return map[string]interface{}{"port": p}, nil
